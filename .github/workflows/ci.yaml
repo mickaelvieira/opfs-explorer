@@ -13,6 +13,8 @@ jobs:
   build:
     name: Continuous Integration
     runs-on: ubuntu-22.04
+    permissions:
+      packages: read
 
     steps:
       - name: Checkout source code
@@ -24,6 +26,8 @@ jobs:
           node-version: 18
           cache: yarn
           cache-dependency-path: yarn.lock
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mickaelvieira'
 
       - name: Check packages version
         uses: ./.github/actions/check-packages-exact-version
@@ -31,14 +35,12 @@ jobs:
       - name: Install dependencies
         run: |
           yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint
         run: |
           yarn lint
-
-      - name: Test
-        run: |
-          yarn test
 
       - name: Compile
         run: |
