@@ -1,6 +1,8 @@
 # OPFS Explorer
 
-OPFS Explorer is a simple web component that can be embed in a web application to explorer the Origin Private File System.
+OPFS Explorer is a web component that can be embed in a web application to explorer the [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API#origin_private_file_system).
+
+<img src="./docs/assets/opfs-explorer.png" width="800px">
 
 ## Install
 
