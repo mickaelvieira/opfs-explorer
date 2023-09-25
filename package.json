@@ -12,7 +12,8 @@
     "bundle": "rollup -c",
     "compile": "tsc --p tsconfig.json",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "examples": "yarn && yarn bundle && echo \"examples/basic examples/custom\" | xargs -n 1 cp -v ./dist/index.js"
   },
   "devDependencies": {
     "@jest/globals": "29.5.0",

@@ -59,3 +59,9 @@ opfs-explorer::part(statistics) {
   display: none;
 }
 ```
+
+## Examples
+
+```sh
+yarn examples
+```
