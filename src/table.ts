@@ -147,10 +147,8 @@ export class Table extends LitElement {
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
-      border: 1px solid var(--opfs-color-border);
-      border-radius: 10px;
-      font-size: var(--opfs-font-size);
-      background-color: var(--opfs-color-background, #ffffff);
+      border: 1px solid var(--opfs-color-border, var(--opfs-default-color-border));
+      background-color: var(--opfs-color-background, inherit);
     }
 
     table {
@@ -158,14 +156,18 @@ export class Table extends LitElement {
     }
 
     table thead {
-      color: var(--opfs-color-primary, #f97316);
+      color: var(--opfs-color-primary, inherit);
     }
 
     table td,
     table th {
       padding: 12px 8px;
       vertical-align: middle;
-      border-bottom: 1px solid var(--opfs-color-border);
+      border-bottom: 1px solid var(--opfs-color-border, var(--opfs-default-color-border));
+    }
+
+    table tr:last-child td {
+      border-bottom: 0;
     }
 
     table button {
@@ -183,22 +185,12 @@ export class Table extends LitElement {
     }
 
     table tbody tr[data-empty] td {
-      padding: 100px 0 0;
-      border-bottom: 0;
+      padding: 24px 0;
     }
 
     table tbody tr[data-empty],
     table tbody tr:first-child {
       cursor: default;
-    }
-
-    table tbody tr[data-empty]:hover,
-    table tbody tr:first-child:hover {
-      background-color: transparent;
-    }
-
-    table tbody tr:hover {
-      background-color: var(--opfs-color-background, #ffffff);
     }
 
     table tbody tr td:first-child,
@@ -221,7 +213,8 @@ export class Table extends LitElement {
       outline: 0;
       border: 0;
       padding: 8px 0 6px;
-      font-size: var(--opfs-font-size);
+      color: var(--opfs-color-text, inherit);
+      font-size: var(--opfs-font-size, inherit);
     }
   `;
 }

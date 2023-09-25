@@ -207,7 +207,11 @@ export class Explorer extends LitElement {
       display: flex;
       flex-direction: column;
       padding: 8px 0;
-      color: var(--opfs-color-text, #000);
+      color: var(--opfs-color-text, inherit);
+      font-size: var(--opfs-font-size, initial);
+      font-family: var(--opfs-font-family, sans-serif);
+
+      --opfs-default-color-border: #000;
     }
 
     header,
@@ -231,10 +235,11 @@ export class Explorer extends LitElement {
       padding: 0 16px;
       height: 32px;
       cursor: pointer;
-      font-family: var(--opfs-font-family, system-ui, Avenir, Helvetica, Arial, sans-serif);
-      border: 1px solid var(--opfs-color-primary, #f97316);
       color: var(--opfs-color-text, inherit);
-      background-color: var(--opfs-color-primary, #f97316);
+      font-size: var(--opfs-font-size, inherit);
+      font-family: var(--opfs-font-family, inherit);
+      border: none;
+      background-color: var(--opfs-color-primary, transparent);
     }
 
     section {
@@ -243,25 +248,25 @@ export class Explorer extends LitElement {
       flex-grow: 1;
       overflow-y: scroll;
       padding-right: 4px;
-      scrollbar-color: var(--opfs-color-primary, #f97316) var(--opfs-color-background, #ffffff);
+      scrollbar-color: var(--opfs-color-primary, #ccc) var(--opfs-color-background, initial);
       scrollbar-width: thin;
     }
 
     section::-webkit-scrollbar {
       width: 8px;
-      background-color: var(--opfs-color-background, #ffffff);
+      background-color: var(--opfs-color-background, initial);
     }
 
     section::-webkit-scrollbar-track {
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       border-radius: 6px;
-      background-color: var(--opfs-color-background, #ffffff);
+      background-color: var(--opfs-color-background, initial);
     }
 
     section::-webkit-scrollbar-thumb {
       border-radius: 6px;
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background-color: var(--opfs-color-primary, #f97316);
+      background-color: var(--opfs-color-primary, initial);
     }
   `;
 }
