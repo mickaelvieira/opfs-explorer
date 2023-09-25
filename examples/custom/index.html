@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OPFS Explorer Custom</title>
+  <script type="module" src="index.js"></script>
+  <style type="text/css">
+    opfs-explorer {
+      --opfs-font-family: Arial;
+      --opfs-font-size: 0.8rem;
+      --opfs-color-background: #eee;
+      --opfs-color-border: gray;
+      --opfs-color-primary: orange;
+      --opfs-color-text: black;
+    }
+
+    opfs-explorer::part(statistics) {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <opfs-explorer breadcrumbs-root-label="/"></opfs-explorer>
+</body>
+
+</html>
