@@ -41,8 +41,8 @@ export class Breadcrumb extends LitElement {
       border: none;
       padding: 8px;
       cursor: pointer;
-      color: var(--opfs-color-text, #000);
-      font-size: var(--opfs-font-size, 1rem);
+      color: var(--opfs-color-text, inherit);
+      font-size: var(--opfs-font-size, inherit);
     }
 
     span {

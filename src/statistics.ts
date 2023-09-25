@@ -26,7 +26,6 @@ export class Statistics extends LitElement {
   static override styles = css`
     :host {
       display: flex;
-      font-size: 0.85rem;
       align-items: center;
     }
   `;
