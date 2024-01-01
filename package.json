@@ -16,7 +16,7 @@
     "examples": "yarn && yarn bundle && echo \"examples/basic examples/custom\" | xargs -n 1 cp -v ./dist/index.js"
   },
   "devDependencies": {
-    "@jest/globals": "29.5.0",
+    "@jest/globals": "29.7.0",
     "@mickaelvieira/opfs": "0.1.1",
     "@rollup/plugin-commonjs": "25.0.7",
     "@rollup/plugin-node-resolve": "15.1.0",
