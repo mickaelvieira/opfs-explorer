@@ -1,9 +1,9 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, css, html, nothing } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-@customElement('opfs-explorer-breadcrumb')
+@customElement("opfs-explorer-breadcrumb")
 export class Breadcrumb extends LitElement {
-  @property({ type: String, attribute: 'root-label' })
+  @property({ type: String, attribute: "root-label" })
   declare rootLabel: string;
 
   @property({ type: Object })
@@ -12,20 +12,25 @@ export class Breadcrumb extends LitElement {
   constructor() {
     super();
     this.breadcrumb = [];
-    this.rootLabel = 'Root';
+    this.rootLabel = "Root";
   }
 
   private _handleClick(handle: FileSystemDirectoryHandle) {
-    this.dispatchEvent(new CustomEvent('click-directory', { detail: { handle } }));
+    this.dispatchEvent(
+      new CustomEvent("click-directory", { detail: { handle } }),
+    );
   }
 
   protected override render() {
     return html`
       ${this.breadcrumb.map(
-        (handle, index) => html`<button @click=${() => this._handleClick(handle)}>
-            ${handle.name ? handle.name : this.rootLabel}
-          </button>
-          ${index < this.breadcrumb.length - 1 ? html`<span>&rsaquo;</span>` : nothing}`
+        (handle, index) =>
+          html`<button @click=${() => this._handleClick(handle)}>
+              ${handle.name ? handle.name : this.rootLabel}
+            </button>
+            ${index < this.breadcrumb.length - 1
+              ? html`<span>&rsaquo;</span>`
+              : nothing}`,
       )}
     `;
   }
@@ -54,6 +59,6 @@ export class Breadcrumb extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'opfs-explorer-breadcrumb': Breadcrumb;
+    "opfs-explorer-breadcrumb": Breadcrumb;
   }
 }

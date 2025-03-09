@@ -1,9 +1,9 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
-import { until } from 'lit/directives/until.js';
-import { formatBytes, formatLongDate, formatShortDate } from './format';
+import { LitElement, css, html, nothing } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { until } from "lit/directives/until.js";
+import { formatBytes, formatLongDate, formatShortDate } from "./format";
 
-@customElement('opfs-explorer-table')
+@customElement("opfs-explorer-table")
 export class Table extends LitElement {
   @property({ type: Object })
   declare files: Array<FileSystemFileHandle>;
@@ -27,16 +27,20 @@ export class Table extends LitElement {
   }
 
   private _handleClickDirectory(handle: FileSystemHandle) {
-    this.dispatchEvent(new CustomEvent(`click-directory`, { detail: { handle } }));
+    this.dispatchEvent(
+      new CustomEvent(`click-directory`, { detail: { handle } }),
+    );
   }
 
   private _handleDeleteDirectory(event: Event, handle: FileSystemHandle) {
     event.stopPropagation();
-    this.dispatchEvent(new CustomEvent(`delete-directory`, { detail: { handle } }));
+    this.dispatchEvent(
+      new CustomEvent(`delete-directory`, { detail: { handle } }),
+    );
   }
 
   private handleEnterKey(event: KeyboardEvent) {
-    if (event.code === 'Enter') {
+    if (event.code === "Enter") {
       this._handleCreateDirectory(event);
     }
   }
@@ -47,14 +51,17 @@ export class Table extends LitElement {
     }
 
     event.preventDefault();
-    const input = this.shadowRoot.querySelector<HTMLInputElement>('input[type="text"]');
+    const input =
+      this.shadowRoot.querySelector<HTMLInputElement>('input[type="text"]');
 
     if (!input || !input.value) {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent(`create-directory`, { detail: { name: input.value } }));
-    input.value = '';
+    this.dispatchEvent(
+      new CustomEvent(`create-directory`, { detail: { name: input.value } }),
+    );
+    input.value = "";
   }
 
   protected override render() {
@@ -75,10 +82,18 @@ export class Table extends LitElement {
             <opfs-icon-folder></opfs-icon-folder>
           </td>
           <td colspan="4">
-            <input type="text" value="" placeholder="path/to/directory" @keydown=${this.handleEnterKey} />
+            <input
+              type="text"
+              value=""
+              placeholder="path/to/directory"
+              @keydown=${this.handleEnterKey}
+            />
           </td>
           <td>
-            <button @click=${this._handleCreateDirectory} title="add a directory">
+            <button
+              @click=${this._handleCreateDirectory}
+              title="add a directory"
+            >
               <opfs-icon-plus></opfs-icon-plus>
             </button>
           </td>
@@ -96,12 +111,15 @@ export class Table extends LitElement {
               </td>
               <td colspan="4">${handle.name}</td>
               <td>
-                <button @click=${(event: PointerEvent) => this._handleDeleteDirectory(event, handle)}>
+                <button
+                  @click=${(event: PointerEvent) =>
+                    this._handleDeleteDirectory(event, handle)}
+                >
                   <opfs-icon-trash></opfs-icon-trash>
                 </button>
               </td>
             </tr>
-          `
+          `,
         )}
         ${this.files.map(
           (handle) =>
@@ -115,16 +133,20 @@ export class Table extends LitElement {
                     <td>${file.name}</td>
                     <td>${file.type}</td>
                     <td>${formatBytes(file.size)}</td>
-                    <td title="${formatLongDate(file.lastModified)}">${formatShortDate(file.lastModified)}</td>
+                    <td title="${formatLongDate(file.lastModified)}">
+                      ${formatShortDate(file.lastModified)}
+                    </td>
                     <td>
                       <button
-                        @click=${(event: PointerEvent) => this._handleDeleteFile(event, handle)}
-                        title="delete this directory">
+                        @click=${(event: PointerEvent) =>
+                          this._handleDeleteFile(event, handle)}
+                        title="delete this directory"
+                      >
                         <opfs-icon-trash></opfs-icon-trash>
                       </button>
                     </td>
                   </tr>
-                `
+                `,
               ),
               html`<tr>
                 <td>&nbsp;</td>
@@ -133,8 +155,8 @@ export class Table extends LitElement {
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-              </tr>`
-            )}`
+              </tr>`,
+            )}`,
         )}
       </tbody>
     </table> `;
@@ -147,7 +169,8 @@ export class Table extends LitElement {
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
-      border: 1px solid var(--opfs-color-border, var(--opfs-default-color-border));
+      border: 1px solid
+        var(--opfs-color-border, var(--opfs-default-color-border));
       background-color: var(--opfs-color-background, inherit);
     }
 
@@ -163,7 +186,8 @@ export class Table extends LitElement {
     table th {
       padding: 12px 8px;
       vertical-align: middle;
-      border-bottom: 1px solid var(--opfs-color-border, var(--opfs-default-color-border));
+      border-bottom: 1px solid
+        var(--opfs-color-border, var(--opfs-default-color-border));
     }
 
     table tr:last-child td {
@@ -221,6 +245,6 @@ export class Table extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'opfs-explorer-table': Table;
+    "opfs-explorer-table": Table;
   }
 }

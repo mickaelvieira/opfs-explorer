@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { styles } from './styles';
+import { LitElement, css, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { styles } from "./styles";
 
-@customElement('opfs-icon-trash')
+@customElement("opfs-icon-trash")
 export class TrashIcon extends LitElement {
   override render() {
     return html`
@@ -13,15 +13,23 @@ export class TrashIcon extends LitElement {
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="32" />
-        <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 112h352" />
+          stroke-width="32"
+        />
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-miterlimit="10"
+          stroke-width="32"
+          d="M80 112h352"
+        />
         <path
           d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224"
           fill="none"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="32" />
+          stroke-width="32"
+        />
       </svg>
     `;
   }

@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { styles } from './styles';
+import { LitElement, css, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { styles } from "./styles";
 
-@customElement('opfs-icon-folder')
+@customElement("opfs-icon-folder")
 export class FolderIcon extends LitElement {
   override render() {
     return html`
@@ -13,7 +13,8 @@ export class FolderIcon extends LitElement {
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="32" />
+          stroke-width="32"
+        />
       </svg>
     `;
   }

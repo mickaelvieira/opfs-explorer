@@ -1,8 +1,8 @@
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
-import { styles } from './styles';
+import { LitElement, css, html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { styles } from "./styles";
 
-@customElement('opfs-icon-file')
+@customElement("opfs-icon-file")
 export class FileIcon extends LitElement {
   override render() {
     return html`
@@ -12,14 +12,16 @@ export class FileIcon extends LitElement {
           fill="none"
           stroke="currentColor"
           stroke-linejoin="round"
-          stroke-width="32" />
+          stroke-width="32"
+        />
         <path
           d="M256 56v120a32 32 0 0032 32h120"
           fill="none"
           stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="32" />
+          stroke-width="32"
+        />
       </svg>
     `;
   }

@@ -1,10 +1,10 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
-import * as fs from '@mickaelvieira/opfs';
-import './table';
-import './breadcrumb';
-import './statistics';
-import './icons';
+import { LitElement, css, html, nothing } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
+import * as fs from "@mickaelvieira/opfs";
+import "./table";
+import "./breadcrumb";
+import "./statistics";
+import "./icons";
 
 interface State {
   root: FileSystemDirectoryHandle;
@@ -13,9 +13,9 @@ interface State {
   breadcrumb: Array<FileSystemDirectoryHandle>;
 }
 
-@customElement('opfs-explorer')
+@customElement("opfs-explorer")
 export class Explorer extends LitElement {
-  @property({ type: String, attribute: 'breadcrumbs-root-label' })
+  @property({ type: String, attribute: "breadcrumbs-root-label" })
   declare bcRootLabel?: string;
 
   @property()
@@ -49,7 +49,7 @@ export class Explorer extends LitElement {
       return;
     }
 
-    const dirpath = parts.join('/');
+    const dirpath = parts.join("/");
     const handles = await window.showOpenFilePicker({
       multiple: true,
     });
@@ -68,7 +68,9 @@ export class Explorer extends LitElement {
     };
   }
 
-  private async _handleClickDirectory(event: CustomEvent<{ handle: FileSystemDirectoryHandle }>) {
+  private async _handleClickDirectory(
+    event: CustomEvent<{ handle: FileSystemDirectoryHandle }>,
+  ) {
     const { handle: directory } = event.detail;
     const entries = await fs.readdir(directory);
     const breadcrumb = await fs.breadcrumb(directory);
@@ -81,7 +83,9 @@ export class Explorer extends LitElement {
     };
   }
 
-  private async _handleClickFile(event: CustomEvent<{ handle: FileSystemFileHandle }>) {
+  private async _handleClickFile(
+    event: CustomEvent<{ handle: FileSystemFileHandle }>,
+  ) {
     const { handle: file } = event.detail;
     const blob = await file.getFile();
 
@@ -94,7 +98,9 @@ export class Explorer extends LitElement {
     await stream.close();
   }
 
-  private async _handleDeleteDirectory(event: CustomEvent<{ handle: FileSystemDirectoryHandle }>) {
+  private async _handleDeleteDirectory(
+    event: CustomEvent<{ handle: FileSystemDirectoryHandle }>,
+  ) {
     const { handle } = event.detail;
 
     if (!confirm(`Do you want to delete the directory ${handle.name}`)) {
@@ -124,7 +130,7 @@ export class Explorer extends LitElement {
 
     path.push(name);
 
-    const result = await fs.mkdir(path.join('/'));
+    const result = await fs.mkdir(path.join("/"));
     if (result) {
       const entries = await fs.readdir(this.state.directory);
       this.statistics = await fs.statistics();
@@ -135,7 +141,9 @@ export class Explorer extends LitElement {
     }
   }
 
-  private async _handleDeleteFile(event: CustomEvent<{ handle: FileSystemFileHandle }>) {
+  private async _handleDeleteFile(
+    event: CustomEvent<{ handle: FileSystemFileHandle }>,
+  ) {
     const { handle } = event.detail;
 
     if (!confirm(`Do you want to delete the file ${handle.name}`)) {
@@ -162,7 +170,7 @@ export class Explorer extends LitElement {
     const directories: Array<FileSystemDirectoryHandle> = [];
 
     this.state.entries.forEach((handle) => {
-      if (handle.kind === 'file') {
+      if (handle.kind === "file") {
         files.push(handle as FileSystemFileHandle);
       } else {
         directories.push(handle as FileSystemDirectoryHandle);
@@ -178,7 +186,8 @@ export class Explorer extends LitElement {
           part="breadcrumb"
           root-label=${this.bcRootLabel ?? nothing}
           .breadcrumb=${this.state.breadcrumb}
-          @click-directory=${this._handleClickDirectory}></opfs-explorer-breadcrumb>
+          @click-directory=${this._handleClickDirectory}
+        ></opfs-explorer-breadcrumb>
         <button @click=${this._handleAddFile}>Add file</button>
       </header>
       <section>
@@ -190,14 +199,16 @@ export class Explorer extends LitElement {
           @delete-file=${this._handleDeleteFile}
           @click-directory=${this._handleClickDirectory}
           @delete-directory=${this._handleDeleteDirectory}
-          @create-directory=${this._handleCreateDirectory}></opfs-explorer-table>
+          @create-directory=${this._handleCreateDirectory}
+        ></opfs-explorer-table>
       </section>
       <footer>
         <opfs-explorer-statistics
           part="statistics"
           quota=${this.statistics.quota}
           usage=${this.statistics.usage}
-          percent=${this.statistics.percent}></opfs-explorer-statistics>
+          percent=${this.statistics.percent}
+        ></opfs-explorer-statistics>
       </footer>
     `;
   }
@@ -248,7 +259,8 @@ export class Explorer extends LitElement {
       flex-grow: 1;
       overflow-y: scroll;
       padding-right: 4px;
-      scrollbar-color: var(--opfs-color-primary, #ccc) var(--opfs-color-background, initial);
+      scrollbar-color: var(--opfs-color-primary, #ccc)
+        var(--opfs-color-background, initial);
       scrollbar-width: thin;
     }
 
@@ -273,6 +285,6 @@ export class Explorer extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'opfs-explorer': Explorer;
+    "opfs-explorer": Explorer;
   }
 }
