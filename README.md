@@ -15,9 +15,8 @@ yarn add @mickaelvieira/opfs-explorer
 ```
 or
 
-
 ```sh
-npm -i @mickaelvieira/opfs-explorer
+npm install @mickaelvieira/opfs-explorer
 ```
 
 ## Usage
