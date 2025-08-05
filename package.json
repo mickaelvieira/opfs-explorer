@@ -17,7 +17,7 @@
     "examples": "yarn && yarn bundle && echo \"examples/basic examples/custom\" | xargs -n 1 cp -v ./dist/index.js"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.0",
+    "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.30.0",
     "@jest/globals": "30.0.4",
     "@mickaelvieira/opfs": "0.1.1",
