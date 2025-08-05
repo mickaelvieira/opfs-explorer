@@ -1,10 +1,10 @@
+import * as fs from "@mickaelvieira/opfs";
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import * as fs from "@mickaelvieira/opfs";
-import "./table";
 import "./breadcrumb";
-import "./statistics";
 import "./icons";
+import "./statistics";
+import "./table";
 
 interface State {
   root: FileSystemDirectoryHandle;
@@ -18,7 +18,7 @@ export class Explorer extends LitElement {
   @property({ type: String, attribute: "breadcrumbs-root-label" })
   declare bcRootLabel?: string;
 
-  @property()
+  @property({ type: Object })
   declare statistics: {
     percent: string;
     usage: string;
@@ -41,7 +41,7 @@ export class Explorer extends LitElement {
     };
   }
 
-  private async _handleAddFile() {
+  async #handleAddFile() {
     const root = await navigator.storage.getDirectory();
     const { directory } = this.state;
     const parts = await root.resolve(directory);
@@ -68,7 +68,7 @@ export class Explorer extends LitElement {
     };
   }
 
-  private async _handleClickDirectory(
+  async #handleClickDirectory(
     event: CustomEvent<{ handle: FileSystemDirectoryHandle }>,
   ) {
     const { handle: directory } = event.detail;
@@ -83,9 +83,7 @@ export class Explorer extends LitElement {
     };
   }
 
-  private async _handleClickFile(
-    event: CustomEvent<{ handle: FileSystemFileHandle }>,
-  ) {
+  async #handleClickFile(event: CustomEvent<{ handle: FileSystemFileHandle }>) {
     const { handle: file } = event.detail;
     const blob = await file.getFile();
 
@@ -98,7 +96,7 @@ export class Explorer extends LitElement {
     await stream.close();
   }
 
-  private async _handleDeleteDirectory(
+  async #handleDeleteDirectory(
     event: CustomEvent<{ handle: FileSystemDirectoryHandle }>,
   ) {
     const { handle } = event.detail;
@@ -118,7 +116,7 @@ export class Explorer extends LitElement {
     }
   }
 
-  private async _handleCreateDirectory(event: CustomEvent<{ name: string }>) {
+  async #handleCreateDirectory(event: CustomEvent<{ name: string }>) {
     const { name } = event.detail;
 
     const root = await navigator.storage.getDirectory();
@@ -141,7 +139,7 @@ export class Explorer extends LitElement {
     }
   }
 
-  private async _handleDeleteFile(
+  async #handleDeleteFile(
     event: CustomEvent<{ handle: FileSystemFileHandle }>,
   ) {
     const { handle } = event.detail;
@@ -186,20 +184,20 @@ export class Explorer extends LitElement {
           part="breadcrumb"
           root-label=${this.bcRootLabel ?? nothing}
           .breadcrumb=${this.state.breadcrumb}
-          @click-directory=${this._handleClickDirectory}
+          @click-directory=${this.#handleClickDirectory}
         ></opfs-explorer-breadcrumb>
-        <button @click=${this._handleAddFile}>Add file</button>
+        <button @click=${this.#handleAddFile}>Add file</button>
       </header>
       <section>
         <opfs-explorer-table
           part="table"
           .files=${files}
           .directories=${directories}
-          @click-file=${this._handleClickFile}
-          @delete-file=${this._handleDeleteFile}
-          @click-directory=${this._handleClickDirectory}
-          @delete-directory=${this._handleDeleteDirectory}
-          @create-directory=${this._handleCreateDirectory}
+          @click-file=${this.#handleClickFile}
+          @delete-file=${this.#handleDeleteFile}
+          @click-directory=${this.#handleClickDirectory}
+          @delete-directory=${this.#handleDeleteDirectory}
+          @create-directory=${this.#handleCreateDirectory}
         ></opfs-explorer-table>
       </section>
       <footer>
