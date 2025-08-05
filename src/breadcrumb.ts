@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 @customElement("opfs-explorer-breadcrumb")
 export class Breadcrumb extends LitElement {
   @property({ type: String, attribute: "root-label" })
-  declare rootLabel: string;
+  declare rootLabel: string | symbol;
 
   @property({ type: Array })
   declare breadcrumb: Array<FileSystemDirectoryHandle>;
