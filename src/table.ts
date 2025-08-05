@@ -5,10 +5,10 @@ import { formatBytes, formatLongDate, formatShortDate } from "./format";
 
 @customElement("opfs-explorer-table")
 export class Table extends LitElement {
-  @property({ type: Object })
+  @property({ type: Array })
   declare files: Array<FileSystemFileHandle>;
 
-  @property({ type: Object })
+  @property({ type: Array })
   declare directories: Array<FileSystemDirectoryHandle>;
 
   constructor() {
@@ -17,35 +17,35 @@ export class Table extends LitElement {
     this.directories = [];
   }
 
-  private _handleClickFile(handle: FileSystemHandle) {
+  #handleClickFile(handle: FileSystemHandle) {
     this.dispatchEvent(new CustomEvent(`click-file`, { detail: { handle } }));
   }
 
-  private _handleDeleteFile(event: Event, handle: FileSystemHandle) {
+  #handleDeleteFile(event: Event, handle: FileSystemHandle) {
     event.stopPropagation();
     this.dispatchEvent(new CustomEvent(`delete-file`, { detail: { handle } }));
   }
 
-  private _handleClickDirectory(handle: FileSystemHandle) {
+  #handleClickDirectory(handle: FileSystemHandle) {
     this.dispatchEvent(
       new CustomEvent(`click-directory`, { detail: { handle } }),
     );
   }
 
-  private _handleDeleteDirectory(event: Event, handle: FileSystemHandle) {
+  #handleDeleteDirectory(event: Event, handle: FileSystemHandle) {
     event.stopPropagation();
     this.dispatchEvent(
       new CustomEvent(`delete-directory`, { detail: { handle } }),
     );
   }
 
-  private handleEnterKey(event: KeyboardEvent) {
+  #handleEnterKey(event: KeyboardEvent) {
     if (event.code === "Enter") {
-      this._handleCreateDirectory(event);
+      this.#handleCreateDirectory(event);
     }
   }
 
-  private _handleCreateDirectory(event: Event) {
+  #handleCreateDirectory(event: Event) {
     if (!this.shadowRoot) {
       return;
     }
@@ -86,12 +86,12 @@ export class Table extends LitElement {
               type="text"
               value=""
               placeholder="path/to/directory"
-              @keydown=${this.handleEnterKey}
+              @keydown=${this.#handleEnterKey}
             />
           </td>
           <td>
             <button
-              @click=${this._handleCreateDirectory}
+              @click=${this.#handleCreateDirectory}
               title="add a directory"
             >
               <opfs-icon-plus></opfs-icon-plus>
@@ -105,7 +105,7 @@ export class Table extends LitElement {
           : nothing}
         ${this.directories.map(
           (handle) => html`
-            <tr @click=${() => this._handleClickDirectory(handle)}>
+            <tr @click=${() => this.#handleClickDirectory(handle)}>
               <td>
                 <opfs-icon-folder></opfs-icon-folder>
               </td>
@@ -113,7 +113,7 @@ export class Table extends LitElement {
               <td>
                 <button
                   @click=${(event: PointerEvent) =>
-                    this._handleDeleteDirectory(event, handle)}
+                    this.#handleDeleteDirectory(event, handle)}
                 >
                   <opfs-icon-trash></opfs-icon-trash>
                 </button>
@@ -126,7 +126,7 @@ export class Table extends LitElement {
             html`${until(
               handle.getFile().then(
                 (file) => html`
-                  <tr @click=${() => this._handleClickFile(handle)}>
+                  <tr @click=${() => this.#handleClickFile(handle)}>
                     <td>
                       <opfs-icon-file></opfs-icon-file>
                     </td>
@@ -139,7 +139,7 @@ export class Table extends LitElement {
                     <td>
                       <button
                         @click=${(event: PointerEvent) =>
-                          this._handleDeleteFile(event, handle)}
+                          this.#handleDeleteFile(event, handle)}
                         title="delete this directory"
                       >
                         <opfs-icon-trash></opfs-icon-trash>

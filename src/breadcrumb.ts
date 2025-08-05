@@ -6,7 +6,7 @@ export class Breadcrumb extends LitElement {
   @property({ type: String, attribute: "root-label" })
   declare rootLabel: string;
 
-  @property({ type: Object })
+  @property({ type: Array })
   declare breadcrumb: Array<FileSystemDirectoryHandle>;
 
   constructor() {
@@ -15,7 +15,7 @@ export class Breadcrumb extends LitElement {
     this.rootLabel = "Root";
   }
 
-  private _handleClick(handle: FileSystemDirectoryHandle) {
+  #handleClick(handle: FileSystemDirectoryHandle) {
     this.dispatchEvent(
       new CustomEvent("click-directory", { detail: { handle } }),
     );
@@ -25,7 +25,7 @@ export class Breadcrumb extends LitElement {
     return html`
       ${this.breadcrumb.map(
         (handle, index) =>
-          html`<button @click=${() => this._handleClick(handle)}>
+          html`<button @click=${() => this.#handleClick(handle)}>
               ${handle.name ? handle.name : this.rootLabel}
             </button>
             ${index < this.breadcrumb.length - 1
