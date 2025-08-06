@@ -63,4 +63,6 @@ opfs-explorer::part(statistics) {
 
 ```sh
 yarn examples
+cd examples/basic && npx http-server .
+cd examples/custom && npx http-server .
 ```
