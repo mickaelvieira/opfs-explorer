@@ -20,7 +20,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.30.0",
     "@jest/globals": "30.0.4",
-    "@mickaelvieira/opfs": "0.1.1",
+    "@mickaelvieira/opfs": "0.2.0",
     "@rollup/plugin-commonjs": "28.0.3",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-swc": "0.4.0",

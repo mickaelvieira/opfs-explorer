@@ -30,7 +30,7 @@ export class Explorer extends LitElement {
 
   protected override async firstUpdated(): Promise<void> {
     const directory = await navigator.storage.getDirectory();
-    const entries = await fs.readdir(directory);
+    const entries = await fs.readDir(directory);
 
     this.statistics = await fs.statistics();
     this.state = {
@@ -56,10 +56,10 @@ export class Explorer extends LitElement {
 
     for (const handle of handles) {
       const file = await handle.getFile();
-      await fs.writeFile(`${dirpath}/${handle.name}`, file);
+      await fs.createFile(`${dirpath}/${handle.name}`, file);
     }
 
-    const entries = await fs.readdir(this.state.directory);
+    const entries = await fs.readDir(this.state.directory);
 
     this.statistics = await fs.statistics();
     this.state = {
@@ -72,7 +72,7 @@ export class Explorer extends LitElement {
     event: CustomEvent<{ handle: FileSystemDirectoryHandle }>,
   ) {
     const { handle: directory } = event.detail;
-    const entries = await fs.readdir(directory);
+    const entries = await fs.readDir(directory);
     const breadcrumb = await fs.breadcrumb(directory);
 
     this.state = {
@@ -105,9 +105,9 @@ export class Explorer extends LitElement {
       return;
     }
 
-    const result = await fs.rmdir(handle);
+    const result = await fs.removeDir(handle);
     if (result) {
-      const entries = await fs.readdir(this.state.directory);
+      const entries = await fs.readDir(this.state.directory);
       this.statistics = await fs.statistics();
       this.state = {
         ...this.state,
@@ -128,9 +128,9 @@ export class Explorer extends LitElement {
 
     path.push(name);
 
-    const result = await fs.mkdir(path.join("/"));
+    const result = await fs.createDir(path.join("/"));
     if (result) {
-      const entries = await fs.readdir(this.state.directory);
+      const entries = await fs.readDir(this.state.directory);
       this.statistics = await fs.statistics();
       this.state = {
         ...this.state,
@@ -150,7 +150,7 @@ export class Explorer extends LitElement {
 
     const result = await fs.removeFile(handle);
     if (result) {
-      const entries = await fs.readdir(this.state.directory);
+      const entries = await fs.readDir(this.state.directory);
       this.statistics = await fs.statistics();
       this.state = {
         ...this.state,
