@@ -776,10 +776,10 @@
     is-module "^1.0.0"
     resolve "^1.22.1"
 
-"@rollup/plugin-swc@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-swc/-/plugin-swc-0.4.0.tgz#fb637e505dfd4506bd92258e8fc616d348a212be"
-  integrity sha512-oAtqXa8rOl7BOK1Rz3rRxI+LIL53S9SqO2KSq2UUUzWgOgXg6492Jh5mL2mv/f9cpit8zFWdwILuVeozZ0C8mg==
+"@rollup/plugin-swc@0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-swc/-/plugin-swc-0.4.1.tgz#90f1a8bb5bf6f11a19fef3d9ce3df60a264e1be2"
+  integrity sha512-widfnT1TbDc4hsV37PQ61ZoLGPJ7STZE4lQzA3gWKbcMfzjOgiGsoTYfSsq21H4J2UY1y3MKwejXTMkwN2tEtQ==
   dependencies:
     "@rollup/pluginutils" "^5.0.1"
     smob "^1.4.0"
